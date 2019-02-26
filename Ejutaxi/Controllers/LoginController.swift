@@ -160,7 +160,7 @@ class LoginController: UIViewController, UITextFieldDelegate, CLLocationManagerD
                             let locationAlert = UIAlertController (title: "Error de Localización", message: "Estimado cliente es necesario que active la localización de su dispositivo.", preferredStyle: .alert)
                             locationAlert.addAction(UIAlertAction(title: "Aceptar", style: .default, handler: {alerAction in
                                 UIApplication.shared.openURL(NSURL(string:UIApplication.openSettingsURLString)! as URL)
-                                //self.Login()
+                                exit(0)
                             }))
                             locationAlert.addAction(UIAlertAction(title: "No", style: .default, handler: {alerAction in
                                 exit(0)
@@ -177,7 +177,17 @@ class LoginController: UIViewController, UITextFieldDelegate, CLLocationManagerD
                     }else{
                         let locationAlert = UIAlertController (title: "Error de Localización", message: "Estimado cliente es necesario que active la localización de su dispositivo.", preferredStyle: .alert)
                         locationAlert.addAction(UIAlertAction(title: "Aceptar", style: .default, handler: {alerAction in
-                            UIApplication.shared.openURL(NSURL(string:"App-Prefs:root=Privacy&path=LOCATION_SERVICES")! as URL)
+                            if #available(iOS 10.0, *) {
+                                let settingsURL = URL(string: UIApplication.openSettingsURLString)!
+                                UIApplication.shared.open(settingsURL, options: [:], completionHandler: { success in
+                                    exit(0)
+                                })
+                            } else {
+                                if let url = NSURL(string:UIApplication.openSettingsURLString) {
+                                    UIApplication.shared.openURL(url as URL)
+                                    exit(0)
+                                }
+                            }
                         }))
                         locationAlert.addAction(UIAlertAction(title: "No", style: .default, handler: {alerAction in
                             exit(0)

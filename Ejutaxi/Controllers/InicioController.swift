@@ -263,6 +263,7 @@ class InicioController: UIViewController, CLLocationManagerDelegate, URLSessionD
                 }
             }
         }
+
         return upgradeAvailable
     }
     
