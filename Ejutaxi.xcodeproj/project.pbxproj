@@ -326,6 +326,7 @@
 				C6D66D182221AB1D00BC8CA9 /* beep.mp3 */,
 				84609EE21C758E6F0056A282 /* icons */,
 				8462408E1BEABBB800F272D5 /* Entitlements.plist */,
+				B5F753E31D5D045500FFDFD0 /* Main.storyboard */,
 				84F571451BCE958200FC18D5 /* Ejutaxi */,
 				84F5715A1BCE958200FC18D5 /* XtaxiTests */,
 				84F571651BCE958200FC18D5 /* XtaxiUITests */,
@@ -351,7 +352,6 @@
 				AFD656631FA1734300C8A5BD /* Views */,
 				B58F1E601E638A2D008F07AC /* Class */,
 				B58F1E5C1E635C5F008F07AC /* Controllers */,
-				B5F753E31D5D045500FFDFD0 /* Main.storyboard */,
 				84F571521BCE958200FC18D5 /* Info.plist */,
 				84F28A271CC13CC400529F53 /* Images-5.xcassets */,
 				AFD656291F9D42DE00C8A5BD /* AppDelegate.swift */,
@@ -515,6 +515,7 @@
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
 			knownRegions = (
+				English,
 				en,
 				Base,
 			);
@@ -850,7 +851,7 @@
 				INFOPLIST_FILE = "$(SRCROOT)/Ejutaxi/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				ONLY_ACTIVE_ARCH = NO;
+				ONLY_ACTIVE_ARCH = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = com.xoait.Ejutaxi;
 				PRODUCT_NAME = Ejutaxi.temp_caseinsensitive_rename;
 				PROVISIONING_PROFILE = "";
@@ -886,7 +887,7 @@
 				INFOPLIST_FILE = "$(SRCROOT)/Ejutaxi/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				ONLY_ACTIVE_ARCH = NO;
+				ONLY_ACTIVE_ARCH = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = com.xoait.Ejutaxi;
 				PRODUCT_NAME = Ejutaxi.temp_caseinsensitive_rename;
 				PROVISIONING_PROFILE = "";
