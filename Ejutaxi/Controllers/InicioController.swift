@@ -639,8 +639,61 @@ class InicioController: UIViewController, CLLocationManagerDelegate, URLSessionD
         self.Inicio()
     }
     
-    
-    
+  //FUNCION DETERMINAR DIRECCIÓN A PARTIR DE COORDENADAS
+  func DireccionDeCoordenada(_ coordenada : CLLocationCoordinate2D, directionText : UITextField){
+    let geocoder = CLGeocoder()
+    var address = ""
+    if CConexionInternet.isConnectedToNetwork() == true {
+      let temporaLocation = CLLocation(latitude: coordenada.latitude, longitude: coordenada.longitude)
+      CLGeocoder().reverseGeocodeLocation(temporaLocation, completionHandler: {(placemarks, error) -> Void in
+        if error != nil {
+          print("Reverse geocoder failed with error" + (error?.localizedDescription)!)
+          return
+        }
+        
+        if (placemarks?.count)! > 0 {
+          let placemark = (placemarks?.first)! as CLPlacemark
+       
+          if let name = placemark.addressDictionary?["Name"] as? String {
+            address += name
+          }
+          
+          if let locality = placemark.addressDictionary?["City"] as? String {
+            address += " \(locality)"
+          }
+//
+//          if let state = placemark.addressDictionary?["State"] as? String {
+//            address += " \(state)"
+//          }
+//
+//          if let country = placemark.country{
+//            address += " \(country)"
+//          }
+          directionText.text = address
+          //self.GeolocalizandoView.isHidden = true
+        }
+        else {
+          directionText.text = "No disponible"
+          //self.GeolocalizandoView.isHidden = true
+        }
+      })
+      
+    }else{
+      ErrorConexion()
+    }
+  }
+//  func AddressToCoordenate(address: String) {
+//    var geocoder = CLGeocoder()
+//    geocoder.geocodeAddressString(address) {
+//      placemarks, error in
+//      let placemark = placemarks?.first
+//      let lat = placemark?.location?.coordinate.latitude
+//      let lon = placemark?.location?.coordinate.longitude
+//      self.destinoAnotacion = GMSMarker(position: CLLocationCoordinate2D(latitude: lat!, longitude: lon!))
+//      self.destinoAnotacion.map = self.mapaVista
+//    }
+//  }
+  
     //MARK:- CONTROL DE TECLADO VIRTUAL
     //Funciones para mover los elementos para que no queden detrás del teclado
     
@@ -725,7 +778,7 @@ class InicioController: UIViewController, CLLocationManagerDelegate, URLSessionD
          NSLayoutConstraint(item: myView, attribute: .trailing, relatedBy: .equal, toItem: view, attribute: .trailingMargin, multiplier: 1.0, constant: 0.0).isActive = true
          
          NSLayoutConstraint(item: myView, attribute: .height, relatedBy: .equal, toItem: myView, attribute:.width, multiplier: 2.0, constant:0.0).isActive = true?*/
-        
+        self.DireccionDeCoordenada(mapaVista.centerCoordinate, directionText: self.origenText)
         self.CargarFavoritas()
         self.TablaDirecciones.reloadData()
         self.origenIcono.isHidden = true
@@ -733,7 +786,7 @@ class InicioController: UIViewController, CLLocationManagerDelegate, URLSessionD
         coreLocationManager.stopUpdatingLocation()
         self.SolicitarBtn.isHidden = true
         self.formularioSolicitud.isHidden = false
-        self.origenText.becomeFirstResponder()
+        //self.origenText.becomeFirstResponder()
         let datos = "#Posicion," + myvariables.cliente.idCliente + "," + "\(self.origenAnotacion.coordinate.latitude)," + "\(self.origenAnotacion.coordinate.longitude)," + "# \n"
         EnviarSocket(datos)
         if myvariables.cliente.empresa != "null"{

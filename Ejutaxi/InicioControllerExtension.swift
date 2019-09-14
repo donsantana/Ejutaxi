@@ -126,6 +126,7 @@ extension InicioController: UITableViewDelegate, UITableViewDataSource{
         }else{
             let cell = tableView.dequeueReusableCell(withIdentifier: "MENUCELL", for: indexPath)
             cell.textLabel?.text = self.MenuArray[indexPath.row].title
+            cell.textLabel?.font = UIFont(name: "HelveticaNeue-Medium", size: 20)
             cell.imageView?.image = UIImage(named: self.MenuArray[indexPath.row].imagen)
             return cell
         }
